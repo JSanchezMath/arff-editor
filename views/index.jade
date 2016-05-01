@@ -4,13 +4,29 @@ block content
   h1= title
   p Checking file: #{file}
   h2 Relation: #{dataset.name}
-  h3 Attributes
-  ul
-    each attribute in dataset.attributes
-     li #{attribute}: #{JSON.stringify(dataset.types[attribute])}
   
   table.table
-    caption= dataset.name
+    caption Attributes
+    thead
+      tr
+        th Attribute
+        th Type
+        th Values  
+    tbody
+      each attribute in dataset.attributes
+        tr
+          td= attribute
+          td= dataset.types[attribute].type
+          case dataset.types[attribute].type
+            when 'nominal'
+              td= dataset.types[attribute].oneof.join(', ')
+            when 'date'
+              td= dataset.types[attribute].format
+            default
+              td= ''
+  
+  table.table
+    caption Dataset
     thead
       tr
         each attribute in dataset.attributes

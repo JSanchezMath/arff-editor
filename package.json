@@ -13,6 +13,6 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "node-arff": "https://github.com/jedabero/node-arff/tarball/ba13bf809e1b3c39c2f801186b4413cec6a67444"
+    "node-arff": "https://github.com/jedabero/node-arff/tarball/7682b1a26ce018978d50dd92fef011f442968cf5"
   }
 }
