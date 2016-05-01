@@ -5,16 +5,26 @@ block content
   p Checking file: #{file}
   h2 Relation: #{dataset.name}
   
-  table.table
+  table.table.table-hover
     caption Attributes
     thead
       tr
+        th(colspan=3) Actions
         th Attribute
         th Type
         th Values  
     tbody
-      each attribute in dataset.attributes
+      each attribute, index in dataset.attributes
         tr
+          td
+            button(type="button").btn.btn-default.arrow-up
+              span.glyphicon.glyphicon-arrow-up
+          td
+            button(type="button").btn.btn-default.arrow-down
+              span.glyphicon.glyphicon-arrow-down
+          td
+            button(type="button").btn.btn-danger
+              span.glyphicon.glyphicon-remove
           td= attribute
           td= dataset.types[attribute].type
           case dataset.types[attribute].type
@@ -25,15 +35,22 @@ block content
             default
               td= ''
   
-  table.table
-    caption Dataset
+  button(type=button).btn.btn-primary Apply Changes
+  button(type=button).btn.btn-info Download
+  
+  table.table.table-condensed.table-bordered.table-responsive
+    caption Dataset #{dataset.data.length > 100 ? "Showing only first 100 items" : ''} 
     thead
       tr
         each attribute in dataset.attributes
           th= attribute
     tbody
-      each row in dataset.data
+      each row, index in dataset.data
+        if index < 100
+          tr
+          each attribute, subIndex in dataset.attributes
+            td= row[attribute]
+    if dataset.data.length > 100
+      tfoot
         tr
-        each attribute in dataset.attributes
-          td= row[attribute]
-          
+          td(colspan=dataset.attributes.length) TOTAL: #{dataset.data.length}
