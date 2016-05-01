@@ -8,3 +8,16 @@ block content
   ul
     each attribute in dataset.attributes
      li #{attribute}: #{JSON.stringify(dataset.types[attribute])}
+  
+  table.table
+    caption= dataset.name
+    thead
+      tr
+        each attribute in dataset.attributes
+          th= attribute
+    tbody
+      each row in dataset.data
+        tr
+        each attribute in dataset.attributes
+          td= row[attribute]
+          
